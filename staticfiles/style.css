@@ -1,0 +1,124 @@
+.primary {
+    background-color: #5a42ec;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  .secondary {
+    background-color: transparent;
+    color: #5a42ec;
+    border: 2px solid #5a42ec;
+    padding: 5px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+  
+  .secondary:hover {
+    background-color: #5a42ec;
+    color: white;
+    text-decoration: none;
+  }
+  .card a {
+    text-decoration: none;
+    color: inherit;
+  }
+  .box-lg {
+    margin: 3em auto;
+  }
+  .how-card {
+    padding: 1em;
+  }
+  .how-card i {
+    color: #5a42ec;
+  }
+  .how-card div {
+    margin: 0.5em 0;
+  }
+  .banner {
+    background-color: #5a42ec;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+    border-radius: 5px;
+  }
+  .white-btn {
+    background-color: white;
+    color: #5a42ec;
+    padding: 8px 20px;
+    border: 2px solid #5a42ec;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .white-btn:hover {
+    background-color: #5a42ec;
+    color: white;
+    text-decoration: none;
+    border-color: #fff;
+  }
+  .form-input {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  .form-input:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+  .form-input::-webkit-input-placeholder {
+    color: #6c757d;
+    opacity: 1;
+  }
+  
+  .form-input::-moz-placeholder {
+    color: #6c757d;
+    opacity: 1;
+  }
+  
+  .form-input:-ms-input-placeholder {
+    color: #6c757d;
+    opacity: 1;
+  }
+  
+  .form-input::placeholder {
+    color: #6c757d;
+    opacity: 1;
+  }
+  .input-box {
+    margin: 0.5em 0;
+  }
+  .pagination .page-link {
+    color: #5a42ec;
+    background-color: white;
+    border: 1px solid #5a42ec;
+  }
+
+  .pagination .page-link:hover {
+    color: white;
+    background-color: #5a42ec;
+    border-color: #5a42ec;
+  }
+
+  .pagination .page-item.active .page-link {
+    color: white;
+    background-color: #5a42ec;
+    border-color: #5a42ec;
+  }

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<title>Post Event | Evemo</title>
+{% endblock head %}
+
+{% block content %}
+<div class="container box-lg">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{% static 'post.png' %}" alt="" height="500px" width="100%">
+        </div>
+        <div class="col-md-6">
+            <div class="card" style="padding: 1em;">
+                <form action="{% url 'create-event' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h2>Register Event</h2>
+                <div class="input-box">
+                    <label for="">Event Name</label>
+                <input type="text" class="form-input" placeholder="Event Name" name="name" required>
+                </div>
+                <div class="input-box">
+                    <label for="">Location</label>
+                <input type="text" class="form-input" placeholder="Kuleshwor,Kathmandu.." name="location" required>
+                </div>
+                <div class="input-box">
+                    <label for="">Date</label>
+                <input type="date" class="form-input" name="date" placeholder="Date" required>
+                </div>
+                <div class="input-box">
+                    <label for="">Time</label>
+                <input type="time" class="form-input" name="time" placeholder="Time" required>
+                </div>
+                <div class="input-box">
+                    <label for="">Price</label>
+                <input type="number" class="form-input" name="price" placeholder="Price" required >
+                <small style="color: red;"> Empty price will be considered as free. </small>
+                </div>
+                <div class="input-box">
+                  <label for="">Cover Image</label> <br>
+              <input type="file" accept="image/*" name="cover" required>
+              </div>
+                <div class="input-box">
+                    <label for="">Organizer</label>
+                <input type="text" class="form-input" name="organizer" placeholder="Organizer" required>
+                </div>
+                <div class="input-box">
+                    <label for="">Contact</label>
+                <input type="tel" class="form-input" name="phone_number" placeholder="98xxxxxxxx" required>
+                </div>
+                <div class="input-box">
+                    <label for="">Description</label>
+                    <textarea class="form-control" id="" cols="30" rows="10" name="description"></textarea>
+                </div>
+                <div class="input-box">
+                    <button type="submit" class="primary" style="width: 100%;">Register Event</button>
+                </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="banner">
+        <h3>Register to EveMo for engagements and participation</h3>
+        <p>We'll review your event after posting.</p>
+      </div>
+  </div>
+{% endblock content %}

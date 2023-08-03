@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<title>Events | Evemo</title>
+{% endblock head %}
+  {% block content %}
+
+  <div class="container">
+    <div style="display: flex;align-items: center;justify-content: space-between;">
+        <div><h2 style="margin:1em 0;">Upcoming Events</h2></div>
+        <form style="display: flex;align-items: center;justify-content: center;">
+        <input type="search" name="search" id="" class="form-input" placeholder="Search Events.." value="{{request.GET.search}}">
+        <button class="primary" style="height: 40px;border-left: none;">
+        <i class="fa fa-search"></i>
+        </button>
+        </form>
+    </div>
+    <div class="row mt-3">
+        {% for event in events %}
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <img src="{{event.cover.url}}" class="card-img-top" alt="Event Name">
+                <div class="card-body">
+                  <a href="{{event.get_absolute_url}}"><h5 class="card-title">{{event.name}}</h5></a>
+                  <p class="card-text">{{event.date}} <br> Rs. {{event.price}} </p>
+                  <a href="{{event.get_absolute_url}}" class="secondary">View</a>
+                </div>
+              </div>
+        </div>
+        {% endfor %}
+        
+    </div>
+</div>
+
+    {% if events.has_other_pages %}
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+      {% if events.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page=1" aria-label="First">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ events.previous_page_number }}" aria-label="Previous">
+            <span aria-hidden="true">&lsaquo;</span>
+          </a>
+        </li>
+      {% endif %}
+
+      {% for page_num in events.paginator.page_range %}
+        <li class="page-item{% if events.number == page_num %} active{% endif %}">
+          <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+        </li>
+      {% endfor %}
+
+      {% if events.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ events.next_page_number }}" aria-label="Next">
+            <span aria-hidden="true">&rsaquo;</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ events.paginator.num_pages }}" aria-label="Last">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}
+
+{% endblock content %}

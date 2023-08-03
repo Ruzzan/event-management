@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Home | Evemo</title>
+{% endblock head %}
+
+{% block content %}
+  <!-- Content -->
+
+  <div class="container box-lg">
+        <div class="row mt-3">
+            <div class="col-md-6 mt-5">
+                <h2>Events made Easy.</h2>
+                <p>All-in-one platform that ensures your favourite events never get missed. Catchup with all the fun and good times with EveMo.</p>
+                <a href="{% url 'events-list' %}" class="primary" style="text-decoration: none;">Explore Events <i class="fa fa-arrow-right"></i></a>
+            </div>
+            <div class="col-md-6 mt-3">
+                <img src="{% static 'hero.svg' %}" alt="" style="margin: 0;height:300px;width: 400px;">
+            </div>
+        </div>
+  </div>
+
+  <div class="container">
+    <div class="banner">
+        <h3>Welcome to EveMo!</h3>
+        <p>
+          {% if request.user.is_authenticated %}
+          Register Events that are happening soon!
+          {%else%}
+          Sign up now to never miss event.
+          {%endif%}
+        </p>
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'create-event' %}" class="white-btn">Post Event</a>
+        {%else%}
+        <a href="{%url 'login'%}" class="white-btn">Login</a>
+        {%endif%}
+      </div>
+  </div>
+
+  <div class="container">
+    <h2 class="text-center mt-5">How EveMo Works?</h2>
+    <div class="row mt-4">
+      <!-- Card 1 -->
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card text-center  how-card">
+          <div class="">
+            <i class="fa fa-search fa-4x"></i>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Find Events</h5>
+            <p class="card-text">Discover exciting events happening near you.</p>
+          </div>
+        
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card text-center how-card">
+          <div>
+            <i class="fa fa-pencil fa-4x"></i>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Register</h5>
+            <p class="card-text">Sign up and register for the events you're interested in.</p>
+          </div>
+         
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card text-center  how-card">
+          <div class="">
+            <i class="fa fa-smile-o fa-4x"></i>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Enjoy Events</h5>
+            <p class="card-text">Have a great time attending the events and creating memorable experiences.</p>
+          </div>
+         
+        </div>
+      </div>
+    </div>
+</div>
+
+{% if events %}
+  <div class="container">
+    <h2 style="margin:1em 0;">Featured Events</h2>
+    <div class="row mt-3">
+      {% for event in events %}
+        <div class="col-md-3">
+            <div class="card">
+                <img src="{{event.cover.url}}" class="card-img-top" alt="Event Name">
+                <div class="card-body">
+                  <a href="{{event.get_absolute_url}}"><h5 class="card-title">{{event.name}}</h5></a>
+                  <p class="card-text">{{event.date}} <br> {%if event.price != 0%} Rs {{event.price}} {%else%} Free {%endif%} </p>
+                  <a href="{{event.get_absolute_url}}" class="secondary">View</a>
+                </div>
+              </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div style="margin-top: 2em;">
+        <a href="{% url 'events-list' %}" class="primary" style="text-decoration: none;">All Events <i class="fa fa-arrow-right"></i></a>
+    </div>
+</div>
+{% endif %}
+
+<div class="container box-lg">
+    <div class="row">
+        <div class="col-md-6" style="margin-top: 5em;">
+            <div class="banner">
+                <h3>Have an Event Happening?</h3>
+                <p>Post it in EveMo for more engagement and participation</p>
+                <a href="{% url 'create-event' %}" class="white-btn">Register Event</a>
+              </div>
+        </div>
+        <div class="col-md-6">
+            <img src="{% static 'post.png' %}" alt="" style="width: 100%;height: 30em;">
+        </div>
+    </div>
+  </div>
+
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<title> Contact | Evemo </title>
+{% endblock head %}
+
+{% block content %}
+  <div class="container box-lg">
+    <div class="banner">
+        <h3>Send us your feedbacks.</h3>
+        <p>We are always open for your suggestions.</p>
+      </div>
+  </div>
+
+  <div class="container box-lg">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card" style="padding: 1em;">
+                <h2>Send Message</h2>
+                <form action="{% url 'contact' %}" method="post">
+                    {% csrf_token %}
+                    <div class="input-box">
+                        <label for="">Full Name</label>
+                    <input type="text" name="full_name" class="form-input" placeholder="Full Name" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="">Email</label>
+                    <input type="email" name="email" class="form-input" placeholder="Full Name" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="">Message</label>
+                    <textarea name="message" id="" cols="30" rows="10" placeholder="Message" class="form-input" style="height: 100px;"></textarea>
+                    </div>
+                    <div class="input-box">
+                        <button type="submit" class="primary" style="width: 100%;">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <img src="{% static 'contact.png' %}" alt="" height="500px" width="100%">
+        </div>
+    </div>
+  </div>
+{% endblock content %}
+

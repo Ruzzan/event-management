@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<title>Edit Event | Evemo</title>
+{% endblock head %}
+
+{% block content %}
+<div class="container box-lg">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{% static 'post.png' %}" alt="" height="500px" width="100%">
+        </div>
+        <div class="col-md-6">
+            <div class="card" style="padding: 1em;">
+                <form action="{% url 'edit-event' event.pk %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h2>Edit Event</h2>
+                <div class="input-box">
+                    <label for="">Event Name</label>
+                <input type="text" class="form-input" value="{{event.name}}" placeholder="Event Name" name="name" required>
+                </div>
+                <div class="input-box">
+                    <label for="">Location</label>
+                <input type="text" class="form-input" placeholder="Kuleshwor,Kathmandu.." name="location" value="{{event.location}}" required>
+                </div>
+                <div class="input-box">
+                    <label for="">Date</label>
+                <input type="date" value="{{event.date|date:'Y-m-d'}}" class="form-input" name="date" placeholder="Date" required>
+                </div>
+                <div class="input-box">
+                    <label for="">Time</label>
+                <input type="time" value="{{event.time|time:'h:i:s'}}" class="form-input" name="time" placeholder="Time" required>
+                </div>
+                <div class="input-box">
+                    <label for="">Price</label>
+                <input type="number" class="form-input" value="{{event.price}}" name="price" placeholder="Price" required >
+                <small style="color: red;"> Empty price will be considered as free. </small>
+                </div>
+                <div class="input-box">
+                  <label for="">Cover Image</label> <br>
+                  {%if event.cover%}
+                    <img src="{{event.cover.url}}" alt="" srcset="" width="100" height="100">
+                    {%endif%}
+              <input type="file" accept="image/*" name="cover" required>
+              </div>
+                <div class="input-box">
+                    <label for="">Organizer</label>
+                <input type="text" class="form-input" value="{{event.organizer}}" name="organizer" placeholder="Organizer" required>
+                </div>
+                <div class="input-box">
+                    <label for="">Contact</label>
+                <input type="tel" class="form-input" name="phone_number" placeholder="98xxxxxxxx" value="{{event.phone_number}}" required>
+                </div>
+                <div class="input-box">
+                    <label for="">Description</label>
+                    <textarea class="form-control" id="" cols="30" rows="10" name="description">{{event.description}}</textarea>
+                </div>
+                <div class="input-box">
+                    <button type="submit" class="primary" style="width: 100%;">Update Event</button>
+                </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="banner">
+        <h3>Event Participants ({{total}}) </h3>
+        <p>All the users who have participated in the event.</p>
+      </div>
+  </div>
+
+  <div class="container">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Event</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Address</th>
+            <th scope="col">Applied On</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for application in applications %}
+          <tr>
+            <th scope="row">
+                <a href="{{application.event.get_absolute_url}}">{{application.event.name}}</a>
+            </th>
+            <td>{{application.full_name}}</td>
+            <td>{{application.email}}</td>
+            <td>{{application.phone_number}}</td>
+            <td>{{application.address}}</td>
+            <td>{{application.timestamp|date}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+  </div>
+
+{% endblock content %}

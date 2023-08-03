@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<title>Events | Evemo</title>
+{% endblock head %}
+{% block content %}
+
+<div class="container">
+    <div style="display: flex;align-items: center;justify-content: space-between;">
+        <div><h2 style="margin:1em 0;">My Registrations ({{total}})</h2></div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Event</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Address</th>
+            <th scope="col">Applied On</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for application in applications %}
+          <tr>
+            <th scope="row">
+                <a href="{{application.event.get_absolute_url}}">{{application.event.name}}</a>
+            </th>
+            <td>{{application.full_name}}</td>
+            <td>{{application.email}}</td>
+            <td>{{application.phone_number}}</td>
+            <td>{{application.address}}</td>
+            <td>{{application.timestamp|date}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      <div class="container" style="margin: 2em 0;">
+        <div class="banner">
+            <h3>View My Events</h3>
+            <br>
+            <a href="{% url 'my-events' %}" class="white-btn">View Events</a>
+          </div>
+      </div>
+</div>
+
+
+    
+
+
+{% endblock content %}

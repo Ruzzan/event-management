@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<title>Login | Evemo</title>
+{% endblock head %}
+
+{% block content %}
+
+<div class="container box-lg">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{% static 'login.png' %}" alt="" height="500px" width="100%">
+        </div>
+        <div class="col-md-6">
+            <div class="card" style="padding: 1em;">
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                <h2>Login</h2>
+                <small style="color: red;">{{error_message}}</small>
+                <div class="input-box">
+                    <label for="">Email</label>
+                <input type="text" class="form-input" placeholder="user@email.com" name="email" required>
+                </div>
+                <div class="input-box">
+                    <label for="">Password</label>
+                <input type="password" name="password" class="form-input" placeholder="Password" required>
+                </div>
+                <div class="input-box">
+                    <button type="submit" class="primary" style="width: 100%;">Login</button>
+                </div>
+                <div class="input-box">
+                    <p>Don't have an account? <a href="{% url 'signup' %}">Register Now</a></p>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
+  {% endblock content %}

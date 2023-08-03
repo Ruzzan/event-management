@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<title>Profile | Evemo</title>
+{% endblock head %}
+
+{% block content %}
+
+<div class="container">
+    <div class="banner">
+        <h3>Hello, {{request.user.full_name}}!</h3>
+        <br>
+        <a href="{% url 'my-events' %}" class="white-btn">View My Events</a>
+      </div>
+  </div>
+
+<div class="container box-lg">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{% static 'signup.png' %}" alt="" height="500px" width="100%">
+        </div>
+        <div class="col-md-6">
+            <div class="card" style="padding: 1em;">
+               <form action="{% url 'profile' %}" method="post" enctype="multipart/form-data">
+                {%csrf_token%}
+                <div class="d-flex justify-content-between">
+                    <h3>My Profile</h3>
+                    <a href="{% url 'logout' %}">Logout <i class="fa fa-sign-out"></i></a>
+                </div>
+                <small style="color: limegreen;">{{message}}</small>
+                <div class="input-box">
+                    {%if user.photo%}
+                    <img src="{{user.photo.url}}" alt="" srcset="" width="100" height="100">
+                    {%endif%}
+                    <br>
+                    <input type="file" name="photo" id="" accept="img/*">
+                </div>
+                <div class="input-box">
+                    <label for="">Full Name</label>
+                <input type="text" value="{{user.full_name}}" class="form-input" placeholder="Full Name" name="full_name" required>
+                </div>
+                <div class="input-box">
+                    <label for="">Email</label>
+                <input type="email" value="{{user.email}}" class="form-input" placeholder="Email" name="email" required>
+                </div>
+                <div class="input-box">
+                    <button type="submit" class="primary" style="width: 100%;">Update</button>
+                </div>
+               </form>
+            </div>
+        </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block script %}
+
+
+{% endblock script %}

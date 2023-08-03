@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<title>Signup | Evemo</title>
+{% endblock head %}
+
+{% block content %}
+<div class="container box-lg">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{% static 'signup.png' %}" alt="" height="500px" width="100%">
+        </div>
+        <div class="col-md-6">
+            <div class="card" style="padding: 1em;">
+               <form action="{% url 'signup' %}" method="post">
+                {%csrf_token%}
+                <h2>Signup</h2>
+                <small style="color: red;">{{error_message}}</small>
+                <div class="input-box">
+                    <label for="">Full Name</label>
+                <input type="text" class="form-input" placeholder="Full Name" name="full_name" required>
+                </div>
+                <div class="input-box">
+                    <label for="">Email</label>
+                <input type="email" class="form-input" placeholder="Email" name="email" required>
+                </div>
+                <div class="input-box">
+                    <label for="">Password</label>
+                <input type="password" class="form-input" id="password1" placeholder="Password" name="password1" required>
+                </div>
+                <div class="input-box">
+                    <label for="">Confirm Password</label>
+                <input type="password" class="form-input" id="password2" placeholder="Password" name="password2" required>
+                </div>
+                <div class="input-box">
+                    <button type="submit" class="primary" style="width: 100%;">Signup</button>
+                </div>
+                <div class="input-box">
+                    <p>Already have an account? <a href="">Login</a></p>
+                </div>
+               </form>
+            </div>
+        </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block script %}
+
+<script>
+    let password1 = document.getElementById('password1');
+    let password2 = document.getElementById('password2');
+
+    password2.addEventListener('input',function() {
+        password1.style.border = '1px solid crimson';
+        password2.style.border = '1px solid crimson';
+        if(password1.value === password2.value) {
+            password1.style.border = '1px solid limegreen';
+            password2.style.border = '1px solid limegreen';
+        }
+    })
+
+</script>
+
+{% endblock script %}
