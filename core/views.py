@@ -5,7 +5,7 @@ from .models import Contact
 from events.models import Event
 
 def home_view(request):
-    featured_events = Event.objects.filter(featured=True)[:4]
+    featured_events = Event.objects.filter(featured=True,approved=True)[:4]
     context = {'events':featured_events}
     return render(request,'core/home.html',context=context)
 

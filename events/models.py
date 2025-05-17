@@ -17,6 +17,7 @@ class Event(models.Model):
     description = models.TextField()
     featured = models.BooleanField(default=False)
     user = models.ForeignKey(User,related_name='events',on_delete=models.CASCADE)
+    approved = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -37,6 +38,7 @@ class Application(models.Model):
     email = models.EmailField(max_length=250)
     phone_number = models.CharField(max_length=10)
     address = models.CharField(max_length=250)
+    approved = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

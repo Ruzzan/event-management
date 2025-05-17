@@ -122,3 +122,6 @@
     background-color: #5a42ec;
     border-color: #5a42ec;
   }
+  .card-img-top {
+    height: 12rem !important;
+  }

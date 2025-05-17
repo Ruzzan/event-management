@@ -24,6 +24,7 @@
                 <div class="card-body">
                   <a href="{{event.get_absolute_url}}"><h5 class="card-title">{{event.name}}</h5></a>
                   <p class="card-text">{{event.date}} <br> Rs. {{event.price}} </p>
+                  <p class="card-text">Approved: {% if event.approved %}Yes{%else%}No{%endif%}</p>
                   <div class="d-flex justify-content-between">
                     <a href="{% url 'edit-event' event.pk %}" class="secondary">Edit <i class="fa fa-pencil"></i></a>
                     <a href="{% url 'delete-event' event.pk %}" class="primary" style="background: crimson;color: white;">Delete <i class="fa fa-trash"></i></a>

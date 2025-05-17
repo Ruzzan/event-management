@@ -25,7 +25,7 @@ def create_event(request):
     return render(request,'events/create.html')
 
 def event_list(request):
-    events = Event.objects.all()
+    events = Event.objects.all().filter(approved=True)
 
     if request.method == 'GET':
         search_query = request.GET.get('search',None)
@@ -54,7 +54,7 @@ def event_list(request):
 
 def event_detail(request,pk):
     event = get_object_or_404(Event.objects.all(),pk=pk)
-    other_events = Event.objects.all().exclude(pk=event.pk)[:4]
+    other_events = Event.objects.all().filter(approved=True).exclude(pk=event.pk)[:4]
     return render(request,'events/detail.html',{'event':event,'other_events':other_events})
 
 def edit_event(request,pk):
